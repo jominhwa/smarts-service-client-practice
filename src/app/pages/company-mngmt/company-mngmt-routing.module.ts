@@ -15,7 +15,7 @@ const routes: Routes = [
     component: AddCompanyComponent,
   },
   {
-    path: 'edit-company',
+    path: 'edit-company/:id',
     component: EditCompanyComponent,
   },
 ];
