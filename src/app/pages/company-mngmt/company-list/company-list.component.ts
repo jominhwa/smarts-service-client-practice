@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 //table page
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-// import { DialogService } from 'src/@dw/dialog/dialog.service';
+import { DialogService } from 'src/@dw/dialog/dialog.service';
 import { Subject } from 'rxjs';
 import { CompanyService } from 'src/@dw/services/leave/company/company.service';
 
@@ -49,7 +49,8 @@ export class CompanyListComponent implements OnInit {
   isRollover = false;
   constructor(
     private router: Router,
-    private companyService: CompanyService // public dialogService: DialogService
+    private companyService: CompanyService,
+    public dialogService: DialogService
   ) {
     this.filterSelectObj = [
       {
@@ -203,28 +204,28 @@ export class CompanyListComponent implements OnInit {
   }
 
   // 회사 삭제
-  //   deleteCompany(id: any) {
-  //     this.dialogService
-  //       .openDialogConfirm('Do you delete this company?')
-  //       .subscribe((result: any) => {
-  //         if (result) {
-  //           // 회사 삭제
-  //           this.companyService.deleteCompany({ _id: id }).subscribe(
-  //             (data: any) => {
-  //               if (data.message == 'delete company') {
-  //                 this.dialogService.openDialogPositive(
-  //                   'Successfully, the company has been delete.'
-  //                 );
-  //                 this.getCompanyList();
-  //               }
-  //             },
-  //             (err: any) => {
-  //               console.log(err);
-  //               this.dialogService.openDialogNegative(err.error.message);
-  //               // alert(err.error.message);
-  //             }
-  //           );
-  //         }
-  //       });
-  //   }
+  deleteCompany(id: any) {
+    this.dialogService
+      .openDialogConfirm('Do you delete this company?')
+      .subscribe((result: any) => {
+        if (result) {
+          // 회사 삭제
+          this.companyService.deleteCompany({ _id: id }).subscribe(
+            (data: any) => {
+              if (data.message == 'delete company') {
+                this.dialogService.openDialogPositive(
+                  'Successfully, the company has been delete.'
+                );
+                this.getCompanyList();
+              }
+            },
+            (err: any) => {
+              console.log(err);
+              this.dialogService.openDialogNegative(err.error.message);
+              // alert(err.error.message);
+            }
+          );
+        }
+      });
+  }
 }

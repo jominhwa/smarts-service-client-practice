@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 //table page
 import * as moment from 'moment';
-// import { DialogService } from 'src/@dw/dialog/dialog.service';
+import { DialogService } from 'src/@dw/dialog/dialog.service';
 import { DataService } from 'src/@dw/store/data.service';
 import { Subject } from 'rxjs';
 import { CompanyService } from 'src/@dw/services/leave/company/company.service';
@@ -70,24 +70,24 @@ export class AddCompanyComponent implements OnInit {
     '2022-10-03',
     '2022-10-10',
   ];
-  //   holidayDateFilter = (d: Date): boolean => {
-  //     if (d == null) {
-  //       return;
-  //     }
-  //     const day = d.getDay();
-  //     // check if date is weekend day
-  //     if (day === 0 || day === 6) {
-  //       return false;
-  //     }
+  holidayDateFilter = (d: Date): any => {
+    if (d == null) {
+      return;
+    }
+    const day = d.getDay();
+    // check if date is weekend day
+    if (day === 0 || day === 6) {
+      return false;
+    }
 
-  //     // check if date is holiday
-  //     let s = moment(d);
-  //     if (this.holidayList) {
-  //       return !this.holidayList.find((x) => {
-  //         return moment(x).isSame(s, 'day');
-  //       });
-  //     }
-  //   };
+    // check if date is holiday
+    let s = moment(d);
+    if (this.holidayList) {
+      return !this.holidayList.find((x) => {
+        return moment(x).isSame(s, 'day');
+      });
+    }
+  };
 
   RolloverDateFilter() {
     console.log('11111111111');
@@ -98,7 +98,7 @@ export class AddCompanyComponent implements OnInit {
     private fb: FormBuilder,
     private dataService: DataService,
     private router: Router,
-    // private dialogService: DialogService,
+    private dialogService: DialogService,
     private formBuilder: FormBuilder,
     private companyService: CompanyService
   ) {}
@@ -195,12 +195,12 @@ export class AddCompanyComponent implements OnInit {
   errorAlert(err: any) {
     switch (err) {
       case 'Duplicate requestLeave':
-        // this.dialogService.openDialogNegative('Duplicate requestLeave.');
+        this.dialogService.openDialogNegative('Duplicate requestLeave.');
         break;
       case 'DB Error':
-        // this.dialogService.openDialogNegative(
-        //   'An error has occurred while requesting'
-        // );
+        this.dialogService.openDialogNegative(
+          'An error has occurred while requesting'
+        );
         break;
     }
   }

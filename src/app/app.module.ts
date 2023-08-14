@@ -13,6 +13,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MainComponent } from './pages/main/main.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DialogModule } from 'src/@dw/dialog/dialog.module';
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, MainComponent],
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
