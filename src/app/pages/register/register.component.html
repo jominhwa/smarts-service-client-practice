@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="form-container">
+      <div class="title">Register</div>
+      <form  [formGroup]="registerForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your email</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error *ngIf="registerForm.controls['email'].invalid">
+            {{
+                registerForm.controls["email"].hasError("required")
+                ? "이메일은 빈칸으로 두면 안됩니다ㅜ"
+                : "이메일 형식에 맞게 적어주세요ㅜ"
+            }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your password</mat-label>
+          <input type="password" matInput formControlName="password" />
+          <mat-error *ngIf="registerForm.controls['password'].invalid">
+            {{
+                registerForm.controls["password"].hasError("required")
+                ? "비밀번호는 빈칸으로 두면 안됩니다 ㅜ"
+                : "최소 6글자 이상 입력하셔야 합니다 ㅜ"
+            }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <div class="buttons-container">
+        <button
+        [disabled]="registerForm.invalid"
+          mat-raised-button
+          class="register-button">
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
